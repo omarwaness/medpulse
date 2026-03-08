@@ -1,0 +1,70 @@
+TRUNCATE TABLE public.records RESTART IDENTITY CASCADE;
+TRUNCATE TABLE public.appointments RESTART IDENTITY CASCADE;
+TRUNCATE TABLE public.patients RESTART IDENTITY CASCADE;
+TRUNCATE TABLE public.billing RESTART IDENTITY CASCADE;
+TRUNCATE TABLE public.owners RESTART IDENTITY CASCADE;
+
+INSERT INTO public.owners (address, email, first_name, last_name, phone)
+VALUES
+('123 Main St, Springfield, IL 62701', 'john.doe@example.com', 'John', 'Doe', '217-555-0101'),
+('456 Oak Avenue, Chicago, IL 60616', 'jane.smith@example.com', 'Jane', 'Smith', '312-555-0145'),
+('789 Pine Road, Naperville, IL 60540', 'michael.brown@example.com', 'Michael', 'Brown', '630-555-0182'),
+('321 Maple Drive, Peoria, IL 61602', 'emily.johnson@example.com', 'Emily', 'Johnson', '309-555-0199'),
+('654 Cedar Lane, Rockford, IL 61107', 'david.wilson@example.com', 'David', 'Wilson', '815-555-0176');
+
+
+INSERT INTO public.patients (breed, date_of_birth, gender, name, species, owner_id)
+VALUES
+('Golden Retriever', '2019-06-15', 'Male', 'Buddy', 'Dog', 1),
+('Siamese', '2021-03-22', 'Female', 'Luna', 'Cat', 1),
+('German Shepherd', '2018-11-02', 'Male', 'Max', 'Dog', 2),
+('Persian', '2020-07-30', 'Female', 'Bella', 'Cat', 3),
+('Bulldog', '2017-09-14', 'Male', 'Rocky', 'Dog', 4),
+('Maine Coon', '2022-01-05', 'Female', 'Cleo', 'Cat', 5);
+
+INSERT INTO public.appointments (appointment_datetime, reason_for_visit, status, patient_id)
+VALUES
+('2026-02-20 09:00:00', 'Annual wellness exam', 'CANCELLED', 1),
+('2026-03-05 14:30:00', 'Vaccination update', 'SCHEDULED', 2),
+('2026-02-18 11:15:00', 'Skin allergy check', 'COMPLETED', 3),
+('2026-03-10 10:00:00', 'Dental cleaning', 'SCHEDULED', 4),
+('2026-02-22 16:00:00', 'Ear infection', 'COMPLETED', 5),
+('2026-03-15 13:45:00', 'Spay surgery consultation', 'SCHEDULED', 6),
+('2026-02-25 09:30:00', 'Follow-up exam', 'COMPLETED', 1),
+('2026-03-18 15:00:00', 'Weight management', 'SCHEDULED', 2),
+('2026-02-28 10:45:00', 'Limping evaluation', 'COMPLETED', 3),
+('2026-03-20 08:30:00', 'Heartworm test', 'SCHEDULED', 4),
+('2026-02-27 12:00:00', 'Vaccination booster', 'NO_SHOW', 5),
+('2026-03-22 14:00:00', 'Routine check-up', 'CANCELLED', 6);
+
+INSERT INTO public.records (diagnosis, notes, treatment_plan, visit_date, appointment_id, patient_id)
+VALUES
+('Healthy', 'Annual wellness exam completed. No issues found.', 'Continue regular diet and exercise. Annual follow-up.', '2026-02-20', 1, 1),
+('Vaccination Needed', 'Rabies and distemper vaccines administered.', 'Monitor for mild side effects. Booster in 1 year.', '2026-03-05', 2, 2),
+('Allergic Dermatitis', 'Mild skin irritation observed.', 'Prescribed antihistamines for 10 days.', '2026-02-18', 3, 3),
+('Dental Tartar', 'Moderate plaque buildup.', 'Dental cleaning completed. Home brushing recommended.', '2026-03-10', 4, 4),
+('Otitis Externa', 'Inflamed ear canal.', 'Prescribed ear drops for 7 days.', '2026-02-22', 5, 5),
+('Pre-Surgical Evaluation', 'Patient cleared for spay surgery.', 'Schedule surgery within 30 days.', '2026-03-15', 6, 6),
+('Routine Follow-up', 'Recovery progressing well.', 'Continue current medication. Recheck in 2 weeks.', '2026-02-25', 7, 1),
+('Overweight', 'Body condition score 7/9.', 'Low-calorie diet and increased activity.', '2026-03-18', 8, 2),
+('Minor Sprain', 'Limping due to mild strain.', 'Rest for 2 weeks. Anti-inflammatory prescribed.', '2026-02-28', 9, 3),
+('Heartworm Negative', 'Test returned negative.', 'Continue monthly prevention.', '2026-03-20', 10, 4),
+('Vaccination Booster Given', 'Booster administered successfully.', 'Annual follow-up recommended.', '2026-02-27', 11, 5),
+('Routine Check-Up', 'Overall healthy condition.', 'Maintain current care routine.', '2026-03-22', 12, 6);
+
+
+INSERT INTO public.billing (payment_date, payment_method, payment_status, total_amount, owner_id)
+VALUES
+('2026-02-20', 'CREDIT_CARD', 'PAID', 120.00, 1),
+('2026-02-18', 'CASH', 'PAID', 85.50, 2),
+('2026-02-22', 'DEBIT_CARD', 'PAID', 64.99, 3),
+('2026-02-25', 'CREDIT_CARD', 'PAID', 150.75, 1),
+('2026-02-27', 'ONLINE_PAYMENT', 'PAID', 95.00, 4),
+('2026-03-05', 'CREDIT_CARD', 'PENDING', 110.00, 2),
+('2026-03-10', 'DEBIT_CARD', 'PAID', 200.00, 3),
+('2026-03-15', 'CREDIT_CARD', 'PENDING', 175.25, 5),
+('2026-03-18', 'CASH', 'PAID', 60.00, 1),
+('2026-03-20', 'ONLINE_PAYMENT', 'PAID', 89.99, 4),
+('2026-03-22', 'CREDIT_CARD', 'PAID', 130.50, 5),
+('2026-03-25', 'DEBIT_CARD', 'PENDING', 210.00, 2);
+
