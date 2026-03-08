@@ -12,8 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**") // Allow CORS for all endpoints
                 .allowedOrigins(
                     "http://localhost:3000",               // Your Next.js URL
-                    "https://medpulse-roan.vercel.app",    // Deployed frontend
-                    "https://medpulse-roan.vercel.app/"
+                    "https://medpulse-roan.vercel.app"     // Deployed frontend
                 ) 
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
